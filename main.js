@@ -2,7 +2,7 @@
 // Load config
 var Eris, FileSync, Simsimi, adapter, app, client, config, db, express, fs, lowdb;
 
-config = require("../config.json");
+config = require("./config.json");
 
 // Create Discord Client
 Eris = require("eris");
