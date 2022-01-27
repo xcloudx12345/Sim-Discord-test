@@ -9,21 +9,17 @@ Simsimi = class Simsimi {
   }
 
   request(content, language, token) {
-    var tokenToUse;
+    var params, tokenToUse, url;
     tokenToUse = token ? token : this.token;
+    url = new URL('https://api.simsimi.net/v2/');
+    params = {
+      text: content,
+      lc: language,
+      cf: false
+    };
+    url.search = new URLSearchParams(params).toString();
     return new Promise(function(resolve, reject) {
-      return fetch("https://api-sv2.simsimi.net/v2/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "x-api-key": tokenToUse
-        },
-        body: JSON.stringify({
-          text: content,
-          lc: language ? language : "vn",
-          cf:false
-        })
-      }).then(async function(res) {
+      return fetch(url).then(async function(res) {
         var data;
         data = (await res.json().catch(function() {
           return {};
